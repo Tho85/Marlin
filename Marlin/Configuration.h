@@ -176,11 +176,17 @@
   #define K1 0.95 //smoothing factor within the PID
   #define PID_dT ((OVERSAMPLENR * 8.0)/(F_CPU / 64.0 / 256.0)) //sampling period of the temperature routine
 
+//PID for Makerlab J-head
+  #define  DEFAULT_Kp 21.73
+  #define  DEFAULT_Ki 1.54
+  #define  DEFAULT_Kd 76.55
+
+
 // If you are using a preconfigured hotend then you can use one of the value sets by uncommenting it
 // Ultimaker
-    #define  DEFAULT_Kp 22.2
-    #define  DEFAULT_Ki 1.08
-    #define  DEFAULT_Kd 114
+//    #define  DEFAULT_Kp 22.2
+//    #define  DEFAULT_Ki 1.08
+//    #define  DEFAULT_Kd 114
 
 // Makergear
 //    #define  DEFAULT_Kp 7.0
@@ -296,9 +302,9 @@ const bool Z_MAX_ENDSTOP_INVERTING = true; // set to true to invert the logic of
 #define DISABLE_Z false
 #define DISABLE_E false // For all extruders
 
-#define INVERT_X_DIR true    // for Mendel set to false, for Orca set to true
-#define INVERT_Y_DIR false    // for Mendel set to true, for Orca set to false
-#define INVERT_Z_DIR true     // for Mendel set to false, for Orca set to true
+#define INVERT_X_DIR false    // for Mendel set to false, for Orca set to true
+#define INVERT_Y_DIR true    // for Mendel set to true, for Orca set to false
+#define INVERT_Z_DIR false     // for Mendel set to false, for Orca set to true
 #define INVERT_E0_DIR false   // for direct drive extruder v9 set to true, for geared extruder set to false
 #define INVERT_E1_DIR false    // for direct drive extruder v9 set to true, for geared extruder set to false
 #define INVERT_E2_DIR false   // for direct drive extruder v9 set to true, for geared extruder set to false
@@ -313,7 +319,7 @@ const bool Z_MAX_ENDSTOP_INVERTING = true; // set to true to invert the logic of
 #define max_software_endstops true  // If true, axis won't move to coordinates greater than the defined lengths below.
 
 // Travel limits after homing
-#define X_MAX_POS 205
+#define X_MAX_POS 175
 #define X_MIN_POS 0
 #define Y_MAX_POS 205
 #define Y_MIN_POS 0
@@ -325,35 +331,35 @@ const bool Z_MAX_ENDSTOP_INVERTING = true; // set to true to invert the logic of
 #define Z_MAX_LENGTH (Z_MAX_POS - Z_MIN_POS)
 //============================= Bed Auto Leveling ===========================
 
-//#define ENABLE_AUTO_BED_LEVELING // Delete the comment to enable (remove // at the start of the line)
+#define ENABLE_AUTO_BED_LEVELING // Delete the comment to enable (remove // at the start of the line)
 
 #ifdef ENABLE_AUTO_BED_LEVELING
 
   // these are the positions on the bed to do the probing
   #define LEFT_PROBE_BED_POSITION 15
-  #define RIGHT_PROBE_BED_POSITION 170
-  #define BACK_PROBE_BED_POSITION 180
+  #define RIGHT_PROBE_BED_POSITION 125
+  #define BACK_PROBE_BED_POSITION 150
   #define FRONT_PROBE_BED_POSITION 20
 
   // these are the offsets to the prob relative to the extruder tip (Hotend - Probe)
-  #define X_PROBE_OFFSET_FROM_EXTRUDER -25
-  #define Y_PROBE_OFFSET_FROM_EXTRUDER -29
-  #define Z_PROBE_OFFSET_FROM_EXTRUDER -12.35
+  #define X_PROBE_OFFSET_FROM_EXTRUDER -34
+  #define Y_PROBE_OFFSET_FROM_EXTRUDER 8
+  #define Z_PROBE_OFFSET_FROM_EXTRUDER -14.6
 
-  #define Z_RAISE_BEFORE_HOMING 4       // (in mm) Raise Z before homing (G28) for Probe Clearance.
+  #define Z_RAISE_BEFORE_HOMING 10       // (in mm) Raise Z before homing (G28) for Probe Clearance.
                                         // Be sure you have this distance over your Z_MAX_POS in case
 
   #define XY_TRAVEL_SPEED 8000         // X and Y axis travel speed between probes, in mm/min
 
   #define Z_RAISE_BEFORE_PROBING 15    //How much the extruder will be raised before traveling to the first probing point.
-  #define Z_RAISE_BETWEEN_PROBINGS 5  //How much the extruder will be raised when traveling from between next probing points
+  #define Z_RAISE_BETWEEN_PROBINGS 10  //How much the extruder will be raised when traveling from between next probing points
 
 
   //If defined, the Probe servo will be turned on only during movement and then turned off to avoid jerk
   //The value is the delay to turn the servo off after powered on - depends on the servo speed; 300ms is good value, but you can try lower it.
   // You MUST HAVE the SERVO_ENDSTOPS defined to use here a value higher than zero otherwise your code will not compile.
 
-//  #define PROBE_SERVO_DEACTIVATION_DELAY 300
+  #define PROBE_SERVO_DEACTIVATION_DELAY 300
 
 
 //If you have enabled the Bed Auto Levelling and are using the same Z Probe for Z Homing,
@@ -402,7 +408,7 @@ const bool Z_MAX_ENDSTOP_INVERTING = true; // set to true to invert the logic of
 
 // default settings
 
-#define DEFAULT_AXIS_STEPS_PER_UNIT   {78.7402,78.7402,200.0*8/3,760*1.1}  // default steps per unit for Ultimaker
+#define DEFAULT_AXIS_STEPS_PER_UNIT   {85.3333,85.3333,2560,158.8308}  // default steps per unit for Ultimaker
 #define DEFAULT_MAX_FEEDRATE          {500, 500, 5, 25}    // (mm/sec)
 #define DEFAULT_MAX_ACCELERATION      {9000,9000,100,10000}    // X, Y, Z, E maximum start speed for accelerated moves. E default values are good for skeinforge 40+, for older versions raise them a lot.
 
@@ -668,15 +674,15 @@ const bool Z_MAX_ENDSTOP_INVERTING = true; // set to true to invert the logic of
 // leaving it undefined or defining as 0 will disable the servo subsystem
 // If unsure, leave commented / disabled
 //
-//#define NUM_SERVOS 3 // Servo index starts with 0 for M280 command
+#define NUM_SERVOS 1 // Servo index starts with 0 for M280 command
 
 // Servo Endstops
 //
 // This allows for servo actuated endstops, primary usage is for the Z Axis to eliminate calibration or bed height changes.
 // Use M206 command to correct for switch height offset to actual nozzle height. Store that setting with M500.
 //
-//#define SERVO_ENDSTOPS {-1, -1, 0} // Servo index for X, Y, Z. Disable with -1
-//#define SERVO_ENDSTOP_ANGLES {0,0, 0,0, 70,0} // X,Y,Z Axis Extend and Retract angles
+#define SERVO_ENDSTOPS {-1, -1, 0} // Servo index for X, Y, Z. Disable with -1
+#define SERVO_ENDSTOP_ANGLES {0,0, 0,0, 125,42} // X,Y,Z Axis Extend and Retract angles
 
 #include "Configuration_adv.h"
 #include "thermistortables.h"
