@@ -2655,7 +2655,19 @@
      //not connected to a pin
      #define SDCARDDETECT 49
  #endif //Minipanel
-
+ 
+ #ifdef MAKERPANEL
+      #define LCD_PINS_RS 47
+      #define LCD_PINS_ENABLE 44
+      #define LCD_PINS_D4 45
+      #define BEEPER 46
+      #define KILL_PIN 12
+      #define BTN_EN1 48
+      #define BTN_EN2 11
+      #define BTN_ENC 10  //the click switch
+      //not connected to a pin
+      #define SDCARDDETECT 49
+ #endif
 
    //encoder rotation values
  #define encrot0 0
