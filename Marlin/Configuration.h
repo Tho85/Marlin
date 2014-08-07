@@ -464,11 +464,11 @@ const bool Z_MAX_ENDSTOP_INVERTING = true; // set to true to invert the logic of
 
 // The MakerLab Maker Panel with graphic controller and SD support
 // http://reprap.org/wiki/Maker_panel
- #define MAKERPANEL
+// #define MAKERPANEL
 
 // The MakerLab Mini Panel with graphic controller and SD support
 // http://reprap.org/wiki/Mini_panel
-// #define MINIPANEL
+ #define MINIPANEL
 
 // The MaKr3d Makr-Panel with graphic controller and SD support
 // http://reprap.org/wiki/MaKr3d_MaKrPanel
