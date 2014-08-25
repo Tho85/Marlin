@@ -462,9 +462,15 @@ const bool Z_MAX_ENDSTOP_INVERTING = true; // set to true to invert the logic of
 //#define LCD_FEEDBACK_FREQUENCY_HZ 1000	// this is the tone frequency the buzzer plays when on UI feedback. ie Screen Click
 //#define LCD_FEEDBACK_FREQUENCY_DURATION_MS 100 // the duration the buzzer plays the UI feedback sound. ie Screen Click
 
+<<<<<<< HEAD
 // The MakerLab Maker Panel with graphic controller and SD support
 // http://reprap.org/wiki/Maker_panel
 // #define MAKERPANEL
+=======
+
+// The MakerLab Multi Panel with OLED display and SD support
+#define MULTIPANEL
+>>>>>>> makerlab
 
 // The MakerLab Mini Panel with graphic controller and SD support
 // http://reprap.org/wiki/Mini_panel
@@ -504,6 +510,14 @@ const bool Z_MAX_ENDSTOP_INVERTING = true; // set to true to invert the logic of
  #define ULTIPANEL
  #define NEWPANEL
  #define U8GLIB_ST7920
+#endif
+
+#if defined (MULTIPANEL)
+ #define DOGLCD
+ #define SDSUPPORT
+ #define ULTIPANEL
+ #define NEWPANEL
+ #define DEFAULT_LCD_CONTRAST 17
 #endif
 
 #if defined (MINIPANEL)
