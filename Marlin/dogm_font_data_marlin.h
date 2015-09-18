@@ -353,7 +353,7 @@ const u8g_fntpgm_uint8_t u8g_font_6x10_marlin[2617] U8G_SECTION(".progmem.u8g_fo
 
 #include "utility/u8g.h"
 
-const u8g_fntpgm_uint8_t chinese[3819] U8G_SECTION(".progmem.chinese") = {
+const u8g_fntpgm_uint8_t chinese[3958] U8G_SECTION(".progmem.chinese") = {
     0,11,10,0,255,9,1,207,3,158,32,255,255,10,255,9,
   255,0,0,0,6,0,0,1,9,9,6,2,0,128,128,128,
   128,128,128,0,0,128,5,3,3,6,0,6,216,72,144,6,
