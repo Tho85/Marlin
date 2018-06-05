@@ -1274,7 +1274,7 @@ void lcd_buttons_update()
 void lcd_buzz(long duration, uint16_t freq)
 {
 #ifdef LCD_USE_I2C_BUZZER
-  lcd.buzz(duration,freq);
+  lcd.buzz(durationz,freq);
 #endif
 }
 

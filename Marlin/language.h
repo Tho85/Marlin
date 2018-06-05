@@ -19,7 +19,7 @@
 //10 Chinese
 
 #ifndef LANGUAGE_CHOICE
-#define LANGUAGE_CHOICE 10  // Pick your language from the list above
+#define LANGUAGE_CHOICE 1  // Pick your language from the list above
 #endif
 
 #define PROTOCOL_VERSION "1.0"
@@ -34,7 +34,7 @@
 	#define MACHINE_NAME "3Drag"
 	#define FIRMWARE_URL "http://3dprint.elettronicain.it/"
 #elif MOTHERBOARD == 310
-	#define MACHINE_NAME "MeBot"
+	#define MACHINE_NAME "Printer"
 	#define FIRMWARE_URL "http://makerlab.me/"
 #else
 	#ifdef CUSTOM_MENDEL_NAME

@@ -136,10 +136,16 @@ static void lcd_implementation_init()
 
    
 	u8g.firstPage();
+
 	do {
 			// RepRap init bmp
-			u8g.drawBitmapP(0,0,START_BMPBYTEWIDTH,START_BMPHEIGHT,start_bmp);
-			// Welcome message
+			//u8g.drawBitmapP(0,0,START_BMPBYTEWIDTH,START_BMPHEIGHT,start_bmp);
+                          
+                          u8g.drawXBMP( (128-u8g_logo_width)/2, 0, u8g_logo_width, u8g_logo_height, u8g_logo_bits);
+
+
+
+/*			// Welcome message
 			u8g.setFont(u8g_font_6x10_marlin);
 			u8g.drawStr(62,10,"MARLIN"); 
 			u8g.setFont(u8g_font_5x8);
@@ -164,7 +170,7 @@ static void lcd_implementation_init()
 			//u8g.setFont(u8g_font_5x8);
 			//u8g.drawStr(62,61,"uses u");
 			//u8g.drawStr90(92,57,"8");
-			//u8g.drawStr(100,61,"glib");
+			//u8g.drawStr(100,61,"glib");*/
 	   } while( u8g.nextPage() );
 }
 
@@ -201,11 +207,15 @@ static void lcd_implementation_status_screen()
  u8g.setColorIndex(1);	// black on white
  
  // Symbols menu graphics, animated fan
- if ((blink % 2) &&  fanSpeed )	u8g.drawBitmapP(9,1,STATUS_SCREENBYTEWIDTH,STATUS_SCREENHEIGHT,status_screen0_bmp);
-	else u8g.drawBitmapP(9,1,STATUS_SCREENBYTEWIDTH,STATUS_SCREENHEIGHT,status_screen1_bmp);
+ //if ((blink % 2) &&  fanSpeed )	u8g.drawBitmapP(9,1,STATUS_SCREENBYTEWIDTH,STATUS_SCREENHEIGHT,status_screen0_bmp);
+//	else u8g.drawBitmapP(9,1,STATUS_SCREENBYTEWIDTH,STATUS_SCREENHEIGHT,status_screen1_bmp);
+
+
+ if ((blink % 2) &&  fanSpeed )	u8g.drawXBMP(36,1,STATUS_FAN1WIDTH,STATUS_FAN1HEIGHT,status_fan1_bmp);
+	else u8g.drawXBMP(36,1,STATUS_FAN0WIDTH,STATUS_FAN0HEIGHT,status_fan0_bmp);
  
  #ifdef SDSUPPORT
- //SD Card Symbol
+//SD Card Symbol
  u8g.drawBox(42,42,8,7);
  u8g.drawBox(50,44,2,5);
  u8g.drawFrame(42,49,10,4);
@@ -239,21 +249,28 @@ static void lcd_implementation_status_screen()
  #endif
  
  // Extruder 1
- u8g.setFont(FONT_STATUSMENU);
- u8g.setPrintPos(6,6);
+u8g.setFont(u8g_font_6x10_marlin);  //New Add
+// u8g.setFont(FONT_STATUSMENU);
+ u8g.setPrintPos(6,10);
  u8g.print(itostr3(int(degTargetHotend(0) + 0.5)));
  lcd_printPGM(PSTR(LCD_STR_DEGREE " "));
  u8g.setPrintPos(6,27);
  u8g.print(itostr3(int(degHotend(0) + 0.5)));
  lcd_printPGM(PSTR(LCD_STR_DEGREE " "));
- if (!isHeatingHotend(0)) u8g.drawBox(13,17,2,2);
+ u8g.drawStr(2,18,"-----");
+// if (!isHeatingHotend(0)) u8g.drawBox(13,17,2,2);
+ if (!isHeatingHotend(0))  u8g.drawXBMP(36,20,HEAT0WIDTH,HEAT0HEIGHT,heat0_bmp);
 	else
 		{
-		 u8g.setColorIndex(0);	// white on black
-		 u8g.drawBox(13,17,2,2);
-		 u8g.setColorIndex(1);	// black on white
+		// u8g.setColorIndex(0);	// white on black
+		// u8g.drawBox(36,20,52,28);
+		// u8g.setColorIndex(1);	// black on white
+                //u8g.drawXBMP(36,20,HEAT1WIDTH,HEAT1HEIGHT,heat1_bmp);
+                 if (blink % 2)  u8g.drawXBMP(36,20,HEAT1WIDTH,HEAT1HEIGHT,heat1_bmp);
+	          else u8g.drawXBMP(36,20,HEAT0WIDTH,HEAT0HEIGHT,heat0_bmp);
+
 		}
- 
+ /*
  // Extruder 2
  u8g.setFont(FONT_STATUSMENU);
  #if EXTRUDERS > 1
@@ -311,6 +328,9 @@ static void lcd_implementation_status_screen()
 		 u8g.drawBox(88,18,2,2);
 		 u8g.setColorIndex(1);	// black on white
 		}
+ */
+ 
+ 
  
  // Fan
  u8g.setFont(FONT_STATUSMENU);
@@ -633,12 +653,12 @@ static void lcd_implementation_quick_feedback()
 
 #if BEEPER > -1
     SET_OUTPUT(BEEPER);
-    for(int8_t i=0;i<10;i++)
+    for(int8_t i=0;i<30;i++)
     {
 		WRITE(BEEPER,HIGH);
-		delay(3);
+		delay(1);
 		WRITE(BEEPER,LOW);
-		delay(3);
+		delay(1);
     }
 #endif
 }
